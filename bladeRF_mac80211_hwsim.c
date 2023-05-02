@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * mac80211_hwsim - software simulator of 802.11 radio(s) for mac80211
+ *
+ * Copyright (c) 2020, Nuand <bladerf@nuand.com> based on mac80211_hwsim 
  * Copyright (c) 2008, Jouni Malinen <j@w1.fi>
  * Copyright (c) 2011, Javier Lopez <jlopex@gmail.com>
  * Copyright (c) 2016 - 2017 Intel Deutschland GmbH
@@ -36,18 +38,19 @@
 #include <linux/virtio.h>
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
-#include "mac80211_hwsim.h"
+//#include "mac80211_hwsim.h"
+#include "bladeRF_mac80211_hwsim.h"
 
 #define WARN_QUEUE 100
 #define MAX_QUEUE 200
 
-MODULE_AUTHOR("Jouni Malinen");
-MODULE_DESCRIPTION("Software simulator of 802.11 radio(s) for mac80211");
+MODULE_AUTHOR("Robert Ghilduta");
+MODULE_DESCRIPTION("bladeRF kernel driver for 802.11 radio(s) using the Nuand bladeRF 2.0 micro xA9");
 MODULE_LICENSE("GPL");
 
 static int radios = 2;
 module_param(radios, int, 0444);
-MODULE_PARM_DESC(radios, "Number of simulated radios");
+MODULE_PARM_DESC(radios, "Number of radios");
 
 static int channels = 1;
 module_param(channels, int, 0444);
@@ -3090,7 +3093,7 @@ static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 					IEEE80211_HE_MAC_CAP2_ACK_EN,
 				.mac_cap_info[3] =
 					IEEE80211_HE_MAC_CAP3_OMI_CONTROL |
-					IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_EXT_3,
+					IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_EXT_3,				  
 				.mac_cap_info[4] = IEEE80211_HE_MAC_CAP4_AMSDU_IN_AMPDU,
 				.phy_cap_info[1] =
 					IEEE80211_HE_PHY_CAP1_PREAMBLE_PUNC_RX_MASK |
